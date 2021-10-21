@@ -1,6 +1,6 @@
 require('dotenv/config')
 
-const { BOT_TOKEN, PORT = 8000 } = process.env
+const { BOT_TOKEN, PORT = 8000, HOST = 'http://localhost:8000' } = process.env
 const request = require('request')
 const { Telegraf } = require('telegraf')
 const express = require('express')
@@ -14,7 +14,7 @@ server.get('/file/:id', async (req, res) => {
 })
 
 bot.on('document', (ctx) => {
-  ctx.reply(`http://localhost:${PORT}/file/${ctx.message.document.file_id}`)
+  ctx.reply(`${HOST}/file/${ctx.message.document.file_id}`)
 })
 
 bot.launch().then(() => {
